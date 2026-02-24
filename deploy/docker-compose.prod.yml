@@ -10,7 +10,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik
-      - traefik.http.routers.analytics.rule=Host(`analitycs.zendaya.tech`)
+      - traefik.http.routers.analytics.rule=Host(`analytics.zendaya.tech`)
       - traefik.http.routers.analytics.entrypoints=websecure
       - traefik.http.routers.analytics.tls=true
       - traefik.http.routers.analytics.tls.certresolver=letsencrypt

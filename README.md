@@ -199,4 +199,4 @@ Server prerequisites:
 
 Traefik routing is configured in `deploy/docker-compose.prod.yml` for:
 
-- `analitycs.zendaya.tech`
+- `analytics.zendaya.tech`
