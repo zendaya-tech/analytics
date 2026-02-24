@@ -95,6 +95,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     env:
       ANALYTICS_IMAGE: ghcr.io/${{ github.repository }}:latest
+      GHCR_LOGIN_TOKEN: ${{ secrets.GHCR_TOKEN != '' && secrets.GHCR_TOKEN || secrets.GITHUB_TOKEN }}
     steps:
       - name: Validate required secrets
         run: |
@@ -126,13 +127,13 @@ jobs:
           username: root
           key: ${{ secrets.VPS_SSH }}
           script_stop: true
-          envs: ANALYTICS_IMAGE
+          envs: ANALYTICS_IMAGE,GHCR_LOGIN_TOKEN
           script: |
             set -e
             mkdir -p /opt/analytics
             mv -f /opt/analytics/docker-compose.prod.yml /opt/analytics/docker-compose.yml
-            test -n "${{ secrets.GHCR_TOKEN }}" || (echo "GHCR_TOKEN missing" && exit 1)
-            docker login ghcr.io -u "${{ github.repository_owner }}" -p "${{ secrets.GHCR_TOKEN }}"
+            test -n "$GHCR_LOGIN_TOKEN" || (echo "No GHCR login token available" && exit 1)
+            docker login ghcr.io -u "${{ github.repository_owner }}" -p "$GHCR_LOGIN_TOKEN"
             export ANALYTICS_IMAGE="$ANALYTICS_IMAGE"
             docker compose -f /opt/analytics/docker-compose.yml pull
             docker compose -f /opt/analytics/docker-compose.yml up -d --remove-orphans
