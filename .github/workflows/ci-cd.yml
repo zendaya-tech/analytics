@@ -108,30 +108,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure SSH key
-        run: |
-          mkdir -p ~/.ssh
-          printf "%s\n" "${{ secrets.VPS_SSH }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H erp.zendaya.tech >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-
-      - name: Copy docker compose to VPS
-        run: |
-          ssh -i ~/.ssh/id_ed25519 root@erp.zendaya.tech "mkdir -p /opt/analytics"
-          scp -i ~/.ssh/id_ed25519 deploy/docker-compose.prod.yml root@erp.zendaya.tech:/opt/analytics/docker-compose.prod.yml
+      - name: Upload docker compose to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: erp.zendaya.tech
+          username: root
+          key: ${{ secrets.VPS_SSH }}
+          source: deploy/docker-compose.prod.yml
+          target: /opt/analytics/
+          overwrite: true
+          strip_components: 1
 
       - name: Deploy over SSH
-        env:
-          GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
-          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
-          ANALYTICS_IMAGE: ${{ env.ANALYTICS_IMAGE }}
-        run: |
-          ssh -i ~/.ssh/id_ed25519 root@erp.zendaya.tech "GHCR_USERNAME='${GHCR_USERNAME}' GHCR_TOKEN='${GHCR_TOKEN}' ANALYTICS_IMAGE='${ANALYTICS_IMAGE}' bash -s" <<'EOF'
-          set -e
-          mv -f /opt/analytics/docker-compose.prod.yml /opt/analytics/docker-compose.yml
-          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
-          export ANALYTICS_IMAGE="$ANALYTICS_IMAGE"
-          docker compose -f /opt/analytics/docker-compose.yml pull
-          docker compose -f /opt/analytics/docker-compose.yml up -d --remove-orphans
-          EOF
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: erp.zendaya.tech
+          username: root
+          key: ${{ secrets.VPS_SSH }}
+          script_stop: true
+          envs: ANALYTICS_IMAGE
+          script: |
+            set -e
+            mkdir -p /opt/analytics
+            mv -f /opt/analytics/docker-compose.prod.yml /opt/analytics/docker-compose.yml
+            docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" -p "${{ secrets.GHCR_TOKEN }}"
+            export ANALYTICS_IMAGE="$ANALYTICS_IMAGE"
+            docker compose -f /opt/analytics/docker-compose.yml pull
+            docker compose -f /opt/analytics/docker-compose.yml up -d --remove-orphans
