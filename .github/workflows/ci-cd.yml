@@ -99,15 +99,11 @@ jobs:
       - name: Validate required secrets
         run: |
           test -n "${{ secrets.VPS_SSH }}" || (echo "VPS_SSH missing" && exit 1)
-          test -n "${{ secrets.GHCR_USERNAME }}" || (echo "GHCR_USERNAME missing" && exit 1)
-          test -n "${{ secrets.GHCR_TOKEN }}" || (echo "GHCR_TOKEN missing" && exit 1)
-          echo "All required deploy secrets are present."
+          echo "VPS_SSH secret is present."
 
       - name: Debug secret presence (safe)
         run: |
           echo "Has VPS_SSH: ${{ secrets.VPS_SSH != '' }}"
-          echo "Has GHCR_USERNAME: ${{ secrets.GHCR_USERNAME != '' }}"
-          echo "Has GHCR_TOKEN: ${{ secrets.GHCR_TOKEN != '' }}"
 
       - name: Checkout
         uses: actions/checkout@v4
