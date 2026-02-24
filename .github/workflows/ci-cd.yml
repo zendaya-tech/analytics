@@ -102,7 +102,7 @@ jobs:
       - name: Upload docker compose to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: analytics.zendaya.tech
+          host: erp.zendaya.tech
           username: root
           key: ${{ secrets.VPS_SSH }}
           source: deploy/docker-compose.prod.yml
