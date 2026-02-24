@@ -1,0 +1,166 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum WorkspaceRole {
+  OWNER
+  ADMIN
+  ANALYST
+  VIEWER
+}
+
+enum SiteStatus {
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  REVOKED
+}
+
+model User {
+  id                   String               @id @default(cuid())
+  email                String               @unique
+  name                 String?
+  passwordHash         String
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  memberships          WorkspaceMember[]
+  ownedWorkspaces      Workspace[]          @relation("WorkspaceOwner")
+  sentInvites          Invite[]             @relation("InviteSender")
+  passwordResetTokens  PasswordResetToken[]
+  acceptedInvitations  Invite[]             @relation("InviteAccepter")
+  auditLogs            AuditLog[]
+}
+
+model Workspace {
+  id            String            @id @default(cuid())
+  name          String
+  slug          String            @unique
+  ownerId       String
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  owner         User              @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members       WorkspaceMember[]
+  sites         Site[]
+  invites       Invite[]
+  auditLogs     AuditLog[]
+  analyticsEvents AnalyticsEvent[]
+}
+
+model WorkspaceMember {
+  id           String        @id @default(cuid())
+  workspaceId  String
+  userId       String
+  role         WorkspaceRole
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  workspace    Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId])
+  @@index([userId])
+  @@index([workspaceId, role])
+}
+
+model Site {
+  id           String      @id @default(cuid())
+  workspaceId  String
+  name         String
+  domain       String
+  timezone     String
+  status       SiteStatus  @default(ACTIVE)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  workspace    Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  analyticsEvents AnalyticsEvent[]
+
+  @@unique([workspaceId, domain])
+  @@index([workspaceId, status])
+}
+
+model AnalyticsEvent {
+  id            String    @id @default(cuid())
+  workspaceId   String
+  siteId        String
+  eventName     String
+  path          String
+  source        String?
+  country       String?
+  referrer      String?
+  visitorId     String?
+  sessionId     String?
+  durationMs    Int?
+  scrollPercent Int?
+  bounced       Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  workspace     Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  site          Site      @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  @@index([siteId, createdAt])
+  @@index([workspaceId, createdAt])
+  @@index([siteId, path])
+  @@index([siteId, country])
+  @@index([siteId, source])
+  @@index([siteId, eventName])
+}
+
+model Invite {
+  id             String         @id @default(cuid())
+  workspaceId    String
+  email          String
+  role           WorkspaceRole
+  tokenHash      String         @unique
+  expiresAt      DateTime
+  status         InviteStatus   @default(PENDING)
+  invitedById    String
+  acceptedById   String?
+  acceptedAt     DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  invitedBy      User           @relation("InviteSender", fields: [invitedById], references: [id], onDelete: Cascade)
+  acceptedBy     User?          @relation("InviteAccepter", fields: [acceptedById], references: [id], onDelete: SetNull)
+
+  @@index([workspaceId, email])
+  @@index([workspaceId, status])
+  @@index([expiresAt])
+}
+
+model PasswordResetToken {
+  id         String   @id @default(cuid())
+  userId     String
+  tokenHash  String   @unique
+  expiresAt  DateTime
+  usedAt     DateTime?
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model AuditLog {
+  id           String   @id @default(cuid())
+  workspaceId  String
+  actorId      String?
+  action       String
+  resource     String
+  resourceId   String?
+  metadata     Json?
+  createdAt    DateTime @default(now())
+  workspace    Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  actor        User?     @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([workspaceId, createdAt])
+  @@index([actorId])
+}
