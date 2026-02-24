@@ -174,3 +174,29 @@ await fetch(`/api/workspaces/${workspaceId}/invite`, {
   body: JSON.stringify({ email: "analyst@company.com", role: "ANALYST" }),
 });
 ```
+
+## GitHub CI/CD
+
+The workflow is defined in `.github/workflows/ci-cd.yml`.
+
+- CI runs on pull requests and pushes to `main`:
+  - `pnpm install --frozen-lockfile`
+  - `pnpm prisma generate`
+  - `pnpm lint`
+  - `pnpm build`
+- CD runs only on push to `main`, after CI succeeds, and deploys to your VPS over SSH.
+
+Required GitHub repository secrets:
+
+- `VPS_SSH` (private SSH key allowed on the server)
+
+Server prerequisites:
+
+- Repo cloned at `/opt/analytics`
+- Docker + Docker Compose installed
+- External Docker network named `traefik` already exists
+- App runtime env file available at `/opt/analytics/.env.production`
+
+Traefik routing is configured in `deploy/docker-compose.prod.yml` for:
+
+- `analitycs.zendaya.tech`

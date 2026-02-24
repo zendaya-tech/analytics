@@ -1,0 +1,21 @@
+services:
+  analytics:
+    image: ${ANALYTICS_IMAGE}
+    container_name: analytics-app
+    restart: unless-stopped
+    env_file:
+      - ./.env.production
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      - traefik.http.routers.analytics.rule=Host(`analitycs.zendaya.tech`)
+      - traefik.http.routers.analytics.entrypoints=websecure
+      - traefik.http.routers.analytics.tls=true
+      - traefik.http.routers.analytics.tls.certresolver=letsencrypt
+      - traefik.http.services.analytics.loadbalancer.server.port=3000
+
+networks:
+  traefik:
+    external: true
