@@ -13,7 +13,7 @@ services:
       - traefik.http.routers.analytics.rule=Host(`analytics.zendaya.tech`)
       - traefik.http.routers.analytics.entrypoints=websecure
       - traefik.http.routers.analytics.tls=true
-      - traefik.http.routers.analytics.tls.certresolver=letsencrypt
+      - traefik.http.routers.analytics.tls.certresolver=le
       - traefik.http.services.analytics.loadbalancer.server.port=3000
 
 networks:
