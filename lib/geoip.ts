@@ -1,5 +1,3 @@
-import geoip from "geoip-lite";
-
 const IP_HEADERS = [
   "x-forwarded-for",
   "x-real-ip",
@@ -50,15 +48,20 @@ export function extractClientIp(headers: Headers) {
   return null;
 }
 
-export function resolveCountryCode(ip: string | null) {
+export async function resolveCountryCode(ip: string | null) {
   if (!ip) {
     return null;
   }
 
-  const lookup = geoip.lookup(ip);
-  if (!lookup?.country) {
+  try {
+    const geoip = await import("geoip-lite");
+    const lookup = geoip.lookup(ip);
+    if (!lookup?.country) {
+      return null;
+    }
+
+    return lookup.country;
+  } catch {
     return null;
   }
-
-  return lookup.country;
 }

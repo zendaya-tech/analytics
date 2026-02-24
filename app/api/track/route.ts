@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
+import type { Prisma } from "@prisma/client";
 import { z } from "zod";
 
 import { extractClientIp, resolveCountryCode } from "@/lib/geoip";
@@ -20,6 +21,31 @@ const trackSchema = z.object({
   bounced: z.boolean().optional(),
   payload: z.record(z.string(), z.unknown()).optional(),
 });
+
+function toInputJson(value: unknown): unknown {
+  if (value === null) {
+    return null;
+  }
+
+  if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+    return value;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => toInputJson(item));
+  }
+
+  if (typeof value === "object") {
+    const obj = value as Record<string, unknown>;
+    const result: Record<string, unknown> = {};
+    for (const [key, item] of Object.entries(obj)) {
+      result[key] = toInputJson(item);
+    }
+    return result;
+  }
+
+  return String(value);
+}
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
@@ -45,7 +71,7 @@ export async function POST(request: Request) {
   const requestHeaders = await headers();
   const userAgent = requestHeaders.get("user-agent") ?? "unknown";
   const clientIp = extractClientIp(requestHeaders);
-  const ipCountry = resolveCountryCode(clientIp);
+  const ipCountry = await resolveCountryCode(clientIp);
 
   const derivedPath = (() => {
     if (parsed.data.path) {
@@ -71,6 +97,7 @@ export async function POST(request: Request) {
   const normalizedScroll = parsed.data.scrollPercent ?? payloadScrollPercent;
 
   const normalizedSource = derivedSource.toLowerCase() === "direct" && parsed.data.referrer ? "Referral" : derivedSource;
+  const payloadJson = toInputJson(parsed.data.payload ?? {}) as Prisma.InputJsonValue;
 
   const country = parsed.data.country && parsed.data.country !== "Unknown" ? parsed.data.country : (ipCountry ?? "Unknown");
 
@@ -108,7 +135,7 @@ export async function POST(request: Request) {
       action: `TRACK_${parsed.data.event.toUpperCase()}`,
       resource: "SITE",
       resourceId: site.id,
-      metadata: {
+      metadata: toInputJson({
         siteDomain: site.domain,
         url: parsed.data.url ?? null,
         path: derivedPath,
@@ -116,9 +143,9 @@ export async function POST(request: Request) {
         country,
         ip: clientIp,
         referrer: parsed.data.referrer ?? null,
-        payload: parsed.data.payload ?? {},
+        payload: payloadJson,
         userAgent,
-      },
+      }) as Prisma.InputJsonValue,
     },
   });
 
