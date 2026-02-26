@@ -1,16 +1,14 @@
-import bcrypt from "bcryptjs";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 async function seed() {
   const email = process.env.SEED_OWNER_EMAIL || "owner@example.com";
-  const password = process.env.SEED_OWNER_PASSWORD || "Password123!";
+  const defaultPasswordHash = "$2b$12$eQeyIuc0fFTEE8PR8O679OwRe4H.pJHTuVZtJ.xVjjW9Z7s7DB.tO";
+  const passwordHash = process.env.SEED_OWNER_PASSWORD_HASH || defaultPasswordHash;
   const workspaceName = process.env.SEED_WORKSPACE_NAME || "Demo Workspace";
   const workspaceSlug = process.env.SEED_WORKSPACE_SLUG || "demo-workspace";
   const siteDomain = process.env.SEED_SITE_DOMAIN || "demo.example.com";
-
-  const passwordHash = await bcrypt.hash(password, 12);
 
   const user = await prisma.user.upsert({
     where: { email },
