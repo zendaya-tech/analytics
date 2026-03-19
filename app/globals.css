@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/container-queries";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: #ffffff;
@@ -11,8 +15,63 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-on-surface: #1d1a24;
+  --color-surface: #fef7ff;
+  --color-surface-bright: #fef7ff;
+  --color-surface-container: #f3ebf9;
+  --color-on-error-container: #93000a;
+  --color-tertiary-container: #585667;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-tertiary-container: #d0cce0;
+  --color-error-container: #ffdad6;
+  --color-on-secondary-fixed-variant: #5516be;
+  --color-on-background: #1d1a24;
+  --color-secondary-fixed: #e9ddff;
+  --color-surface-tint: #7331df;
+  --color-on-primary: #ffffff;
+  --color-on-surface-variant: #4a4455;
+  --color-secondary-container: #8455ef;
+  --color-secondary: #6b38d4;
+  --color-on-secondary: #ffffff;
+  --color-secondary-fixed-dim: #d0bcff;
+  --color-primary: #5300b7;
+  --color-on-tertiary: #ffffff;
+  --color-surface-container-highest: #e8e0ee;
+  --color-outline-variant: #ccc3d7;
+  --color-tertiary-fixed: #e4e0f5;
+  --color-primary-fixed-dim: #d3bbff;
+  --color-tertiary: #403f4f;
+  --color-surface-container-high: #ede5f3;
+  --color-primary-fixed: #ebddff;
+  --color-on-primary-container: #dac5ff;
+  --color-inverse-surface: #332f39;
+  --color-inverse-on-surface: #f6eefc;
+  --color-surface-dim: #dfd7e5;
+  --color-on-secondary-container: #fffbff;
+  --color-on-primary-fixed: #250059;
+  --color-on-tertiary-fixed: #1b1a29;
+  --color-on-error: #ffffff;
+  --color-primary-container: #6d28d9;
+  --color-error: #ba1a1a;
+  --color-surface-container-low: #f9f1ff;
+  --color-tertiary-fixed-dim: #c7c4d8;
+  --color-surface-variant: #e8e0ee;
+  --color-inverse-primary: #d3bbff;
+  --color-on-secondary-fixed: #23005c;
+  --color-on-tertiary-fixed-variant: #464555;
+  --color-on-primary-fixed-variant: #5b00c5;
+  --color-outline: #7b7486;
+
   --font-sans: var(--font-manrope);
   --font-mono: var(--font-space-grotesk);
+  --font-headline: var(--font-manrope);
+  --font-body: var(--font-manrope);
+  --font-label: var(--font-manrope);
+
+  --radius: 1rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-full: 9999px;
 }
 
 body {

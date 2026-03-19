@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zendaya Analytics | Decode Your Digital Growth</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#1d1a24",
+              "surface": "#fef7ff",
+              "background": "#fef7ff",
+              "surface-bright": "#fef7ff",
+              "surface-container": "#f3ebf9",
+              "on-error-container": "#93000a",
+              "tertiary-container": "#585667",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-container": "#d0cce0",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed-variant": "#5516be",
+              "on-background": "#1d1a24",
+              "secondary-fixed": "#e9ddff",
+              "surface-tint": "#7331df",
+              "on-primary": "#ffffff",
+              "on-surface-variant": "#4a4455",
+              "secondary-container": "#8455ef",
+              "secondary": "#6b38d4",
+              "on-secondary": "#ffffff",
+              "secondary-fixed-dim": "#d0bcff",
+              "primary": "#5300b7",
+              "on-tertiary": "#ffffff",
+              "surface-container-highest": "#e8e0ee",
+              "outline-variant": "#ccc3d7",
+              "tertiary-fixed": "#e4e0f5",
+              "primary-fixed-dim": "#d3bbff",
+              "tertiary": "#403f4f",
+              "surface-container-high": "#ede5f3",
+              "primary-fixed": "#ebddff",
+              "on-primary-container": "#dac5ff",
+              "inverse-surface": "#332f39",
+              "inverse-on-surface": "#f6eefc",
+              "surface-dim": "#dfd7e5",
+              "on-secondary-container": "#fffbff",
+              "on-primary-fixed": "#250059",
+              "on-tertiary-fixed": "#1b1a29",
+              "on-error": "#ffffff",
+              "primary-container": "#6d28d9",
+              "error": "#ba1a1a",
+              "surface-container-low": "#f9f1ff",
+              "tertiary-fixed-dim": "#c7c4d8",
+              "surface-variant": "#e8e0ee",
+              "inverse-primary": "#d3bbff",
+              "on-secondary-fixed": "#23005c",
+              "on-tertiary-fixed-variant": "#464555",
+              "on-primary-fixed-variant": "#5b00c5",
+              "outline": "#7b7486"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed-dim">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fef7ff]/80 dark:bg-[#1d1a24]/80 backdrop-blur-xl shadow-[0px_12px_32px_rgba(83,0,183,0.06)] font-['Manrope'] antialiased tracking-tight">
+<div class="flex justify-between items-center px-6 py-3 w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold tracking-tighter text-violet-900 dark:text-violet-100">Zendaya Analytics</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-violet-700 dark:text-violet-400 font-bold border-b-2 border-violet-600 pb-1 transition-all" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-violet-500 transition-colors" href="#">Reports</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-violet-500 transition-colors" href="#">Inventory</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-violet-500 transition-colors" href="#">Team</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-low rounded-full px-4 py-1.5 focus-within:ring-2 ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-on-surface-variant placeholder:text-outline" placeholder="Search analytics..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-violet-50 dark:hover:bg-violet-900/30 rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-violet-50 dark:hover:bg-violet-900/30 rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings">settings</span>
+</button>
+</div>
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-5 py-2 rounded-full font-bold text-sm shadow-lg shadow-primary/20 hover:opacity-90 transition-all active:scale-95">
+                    New Report
+                </button>
+<img alt="User Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-primary-fixed-dim" data-alt="Professional female user avatar profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdS5Su_i6Gwqz9oeEErCV8l9cYSjyT1waYMJ_GJ-Kwlfculkto8bR8Z_K64ifU61s4HEtVtqUGNzDL8r4pPa3GVxKHapVBEm5vCv99kw7bPcfdZWM40GoBBPzmZSRRH--0kK-kAmv_W-No7_6_vx30BXK6ZSn7DW01ZHlMed4NLnkfxdcUS6qTruCy1kcqVIYd5FyOSw1PuLApy2oOkZnl9a3-1RDwK-2zgHo78RH9XyEeOkft_d2PXv98MpDoLjepIHzn7v5apaZ8"/>
+</div>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative px-6 py-20 lg:py-32 overflow-hidden">
+<div class="absolute top-0 right-0 -z-10 w-1/2 h-full opacity-20">
+<div class="absolute top-20 right-0 w-96 h-96 bg-primary-fixed-dim rounded-full blur-[120px]"></div>
+<div class="absolute bottom-0 right-20 w-80 h-80 bg-secondary-fixed rounded-full blur-[100px]"></div>
+</div>
+<div class="max-w-screen-2xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant text-sm font-bold tracking-wide">
+<span class="material-symbols-outlined text-base">auto_awesome</span>
+                        VIOLET PRECISION V2.0 IS LIVE
+                    </div>
+<h1 class="text-5xl lg:text-7xl font-extrabold tracking-tighter text-on-surface leading-[1.1]">
+<span class="text-primary">Decode</span> Your <br/>
+                        Digital Growth
+                    </h1>
+<p class="text-xl text-on-surface-variant max-w-xl font-medium leading-relaxed">
+                        Transition from messy data to clear insights. Zendaya Analytics provides the ethereal clarity required for rigorous business decisions.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold text-lg shadow-xl shadow-primary/25 hover:bg-primary-container transition-all active:scale-95">
+                            GET STARTED FOR FREE
+                        </button>
+<button class="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg text-primary hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                            Watch Demo
+                        </button>
+</div>
+<div class="flex items-center gap-6 pt-8">
+<div class="flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-2 border-surface" data-alt="User testimonial avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg8WMpuiRrWX290eQklsqhqVHh83r9b-HWvlyNelGSERCHHsAHHoQHiqRizZxyJ4xaIyXclSM2BN-vPMFP4iw-00em4OJr8koZh3ZCCgyRr5QYrQPrDkS7ZoMWEl6_2y5D4J_hKTtDzgc-neFbFIge29eDPe2uSFElq0_sZ1uk6O6hjRGC9eEgrg1uOhFxeiNIvPp5Le_j3-9Nt_HD6gfkKztHgPatKn49tWN-67O4H7fd3qYkaTB_x48B5HxswZrSB2fEFCAAMjE9"/>
+<img class="w-10 h-10 rounded-full border-2 border-surface" data-alt="User testimonial avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnwGULXDL_CjH1d8XSEKNIHcF4U6ps9fYPkq2eTDqaFcSQ-wI6x15xTvJnXZAj8VDTGoIpPB7nRDzcDcJ1UtJgGZQKNbAh-H-CZse7p4J3LKf_i0fZO2MrL_Mz2ZMZYrlkTUJKf8ZZfu1Nk-pNIdUNwPcSPZD5HYWgCo6o2jilFKCi1qRkEkkMPhEq43aq9WzcrSa4sHF4dG5kp7IeM4v2PvOOjTY6VgdbJlTpeA-yZhVEmgdQvXVsUzJFRl_JSd0ItbQX4Va_ANPG"/>
+<img class="w-10 h-10 rounded-full border-2 border-surface" data-alt="User testimonial avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkzaLNU2AAugg7iQ60W7ZdAJ-hZ74A-NNrJ8toOYO_CNKhkjar0sDPdk0S5sypRUCKUxUzbpt1U6c390O040saVv1mJlr_sKGDoWQgQv6oZulMKRWbIAzCPxzkZoJAeIFpcrtkkKIHLIP99lMkTbFBxMyMxx9TL2iMISOJrWpRa7UvsV_Cz265O2VqUX1warTpba64wOkLCf5MbZYJDL5KzGKGwcX0ECNARvafK_cPNOebbLKxPwFxPI9_MAmcH_BmH_O9rUs3pzzz"/>
+</div>
+<p class="text-sm font-semibold text-on-surface-variant">Trusted by 2,000+ scaling teams worldwide</p>
+</div>
+</div>
+<!-- Bento Grid Visualization -->
+<div class="grid grid-cols-6 gap-4 h-[500px]">
+<div class="col-span-4 row-span-3 bg-surface-container-lowest rounded-lg shadow-sm p-6 border-outline-variant/10 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-bold text-outline uppercase tracking-widest">Active Velocity</p>
+<h3 class="text-3xl font-extrabold text-on-surface mt-1">+24.8%</h3>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl">trending_up</span>
+</div>
+<div class="mt-4 h-32 bg-surface-container-low rounded-lg relative overflow-hidden">
+<!-- Abstract Data Pattern -->
+<div class="absolute inset-0 opacity-20 bg-gradient-to-t from-primary to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-1 h-16">
+<div class="w-full bg-primary/40 rounded-t-sm h-1/2"></div>
+<div class="w-full bg-primary/40 rounded-t-sm h-3/4"></div>
+<div class="w-full bg-primary/60 rounded-t-sm h-full"></div>
+<div class="w-full bg-primary/40 rounded-t-sm h-2/3"></div>
+<div class="w-full bg-primary/50 rounded-t-sm h-4/5"></div>
+<div class="w-full bg-primary/70 rounded-t-sm h-5/6"></div>
+</div>
+</div>
+</div>
+<div class="col-span-2 row-span-2 bg-secondary-container text-on-secondary-container rounded-lg p-5 flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-4xl mb-2" style="font-variation-settings: 'FILL' 1;">insights</span>
+<p class="text-sm font-bold">Predictive Engines</p>
+</div>
+<div class="col-span-2 row-span-2 bg-surface-container-high rounded-lg p-5 flex flex-col justify-end">
+<p class="text-xs font-bold text-outline">LATENCY</p>
+<p class="text-xl font-bold text-primary">1.2ms</p>
+</div>
+<div class="col-span-4 row-span-1 bg-surface-container rounded-lg p-4 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+<p class="text-sm font-bold text-on-surface">Precision-Grade Security Protocol</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Engineered for Precision -->
+<section class="bg-surface-container-low py-24 px-6">
+<div class="max-w-screen-2xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+<div class="max-w-2xl">
+<h2 class="text-4xl font-extrabold text-on-surface tracking-tight mb-4 leading-tight">Engineered for Precision</h2>
+<p class="text-lg text-on-surface-variant">Our architecture is built on the philosophy of 'Analytical Ethereality'—where complex operations meet effortless interface design.</p>
+</div>
+<div class="flex gap-4">
+<div class="p-3 bg-surface-container-lowest rounded-full shadow-sm text-primary">
+<span class="material-symbols-outlined">query_stats</span>
+</div>
+<div class="p-3 bg-surface-container-lowest rounded-full shadow-sm text-primary">
+<span class="material-symbols-outlined">hub</span>
+</div>
+</div>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Feature Card 1 -->
+<div class="bg-surface-container-lowest p-10 rounded-lg group hover:bg-surface-bright transition-all">
+<div class="w-14 h-14 bg-tertiary-fixed rounded-xl flex items-center justify-center mb-8 group-hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">monitoring</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Real-time Telemetry</h3>
+<p class="text-on-surface-variant leading-relaxed">Instantly capture every event with zero-latency streaming. Observe market shifts the moment they occur.</p>
+</div>
+<!-- Feature Card 2 -->
+<div class="bg-surface-container-lowest p-10 rounded-lg group hover:bg-surface-bright transition-all">
+<div class="w-14 h-14 bg-tertiary-fixed rounded-xl flex items-center justify-center mb-8 group-hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">psychology</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">AI Context Layer</h3>
+<p class="text-on-surface-variant leading-relaxed">Our models don't just find patterns; they understand business intent, filtering noise from actionable signals.</p>
+</div>
+<!-- Feature Card 3 -->
+<div class="bg-surface-container-lowest p-10 rounded-lg group hover:bg-surface-bright transition-all">
+<div class="w-14 h-14 bg-tertiary-fixed rounded-xl flex items-center justify-center mb-8 group-hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">dataset</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Omni-Channel Sync</h3>
+<p class="text-on-surface-variant leading-relaxed">Integrate data from across your stack—CRM, ERP, and Social—into a single source of analytical truth.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonial Section -->
+<section class="py-24 px-6 relative">
+<div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-surface-container-low to-transparent -z-10"></div>
+<div class="max-w-4xl mx-auto text-center space-y-12">
+<div class="flex justify-center gap-1 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<blockquote class="text-3xl lg:text-4xl font-bold text-on-surface tracking-tight leading-snug italic">
+                    "Zendaya Analytics has transformed our data from a burden into a competitive advantage. The precision of the interface is unmatched in the industry."
+                </blockquote>
+<div class="flex flex-col items-center gap-4">
+<img class="w-16 h-16 rounded-full ring-4 ring-primary-fixed-dim" data-alt="CEO of a tech startup portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3hyD4ddor3W0KyrcKuc9HxliC0dP7DW-BhMeb5ga7nxGr9o885trWubER7Vjgi5B44wRfE-0ctVd3huRTrJB2SHjMfLUCqZhZa2Rf4uss7LHs7CBMJVAKOSW30fworSVTL2RYNNw-ameJPNqbmU-4yeso0VVbLE_wjJHCp65xhfiwDJTBJKJeEce3MvaYJRUmEw_k-vg-en7WOurxY5gOWXeBFaMouTmSoJKQqCT5jk2gf_WNlcmBDNdMUqZm2iqCPfPsz1dNhicZ"/>
+<div>
+<p class="font-extrabold text-on-surface text-lg">Marcus Thorne</p>
+<p class="text-primary font-bold tracking-widest text-xs uppercase">CTO, Ethereal Systems</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="max-w-screen-2xl mx-auto px-6 pb-24">
+<div class="bg-primary-container rounded-lg p-12 lg:p-20 relative overflow-hidden shadow-2xl shadow-primary/30">
+<div class="absolute top-0 right-0 p-20 opacity-10">
+<span class="material-symbols-outlined text-[300px]" style="font-variation-settings: 'wght' 100;">analytics</span>
+</div>
+<div class="relative z-10 max-w-2xl">
+<h2 class="text-4xl lg:text-5xl font-extrabold text-on-primary-container leading-tight mb-6">Ready to decode your future?</h2>
+<p class="text-xl text-primary-fixed-dim mb-10">Join the world's most analytical teams and start making data-driven decisions today.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-surface-container-lowest text-primary px-10 py-4 rounded-full font-bold text-lg hover:bg-surface-bright transition-all active:scale-95">
+                            Start Your Free Trial
+                        </button>
+<button class="border-2 border-primary-fixed-dim text-on-primary-container px-10 py-4 rounded-full font-bold text-lg hover:bg-on-primary/10 transition-all">
+                            Contact Sales
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f9f1ff] dark:bg-[#16131c] w-full mt-auto py-12 font-['Manrope'] text-sm tracking-wide">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-10 w-full max-w-screen-2xl mx-auto">
+<div class="space-y-4">
+<span class="font-bold text-violet-800 dark:text-violet-200 text-lg">Zendaya Analytics</span>
+<p class="text-slate-500 dark:text-slate-500 max-w-sm">
+                    Leveraging analytical ethereality to provide business intelligence for the next generation of digital pioneers.
+                </p>
+<p class="text-slate-500 dark:text-slate-500">
+                    © 2024 Zendaya Analytics. Analytical Ethereality.
+                </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-4">
+<p class="text-violet-600 dark:text-violet-300 font-semibold">Product</p>
+<ul class="space-y-2">
+<li><a class="text-slate-500 hover:text-violet-700 dark:hover:text-violet-200 underline-offset-4 hover:underline transition-opacity" href="#">Dashboard</a></li>
+<li><a class="text-slate-500 hover:text-violet-700 dark:hover:text-violet-200 underline-offset-4 hover:underline transition-opacity" href="#">API Documentation</a></li>
+<li><a class="text-slate-500 hover:text-violet-700 dark:hover:text-violet-200 underline-offset-4 hover:underline transition-opacity" href="#">Pricing</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="text-violet-600 dark:text-violet-300 font-semibold">Company</p>
+<ul class="space-y-2">
+<li><a class="text-slate-500 hover:text-violet-700 dark:hover:text-violet-200 underline-offset-4 hover:underline transition-opacity" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 hover:text-violet-700 dark:hover:text-violet-200 underline-offset-4 hover:underline transition-opacity" href="#">Terms of Service</a></li>
+<li><a class="text-slate-500 hover:text-violet-700 dark:hover:text-violet-200 underline-offset-4 hover:underline transition-opacity" href="#">Support</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
